@@ -4,21 +4,22 @@ This project explores the effects of edge perturbation on graph neural networks 
 
 ## Project Structure
 '''
-├── cSBM_visualization.ipynb # Visualization of SBM results\
-├── Experiment on GCNN ebd/ # Experiments on Graph Convolutional Neural Networks\
-│ ├── SBM_GCN.ipynb # GCN experiments on SBM graphs\
-│ └── SBM_GIN.ipynb # GIN experiments on SBM graphs\
-├── Experiments on graph filter ebd/ # Experiments on graph filtering-based embeddings\
-│ ├── BA/ # Experiments on Barabási–Albert graphs\
-│ ├── ENZYMES/ # Experiments on biochemical datasets\
-│ ├── KC/ # KC graph datasets\
-│ ├── SBM/ # Stochastic Block Model graphs\
-│ ├── Sensor/ # Sensor graph datasets\
-│ └── WS/ # Watts-Strogatz small-world networks\
-├── README.md # Project documentation\
-├── utils/ # Utility functions\
-│ ├── pycache/ # Compiled Python files\
-│ └── Perturbe_Algs.py # Core edge perturbation algorithms\
+├── cSBM_visualization.ipynb              # Visualization of SBM results
+├── Experiment on GCNN ebd/               # Experiments on Graph Convolutional Neural Networks
+│   ├── SBM_GCN.ipynb                     # GCN experiments on SBM graphs
+│   └── SBM_GIN.ipynb                     # GIN experiments on SBM graphs
+├── Experiments on graph filter ebd/      # Experiments on graph filtering-based embeddings
+│   ├── BA/                               # Experiments on Barabási–Albert graphs
+│   ├── ENZYMES/                          # Experiments on biochemical datasets
+│   ├── KC/                               # KC graph datasets
+│   ├── SBM/                              # Stochastic Block Model graphs
+│   ├── Sensor/                           # Sensor graph datasets
+│   └── WS/                               # Watts-Strogatz small-world networks
+├── README.md                             # Project documentation
+├── utils/                                # Utility functions
+│   ├── __pycache__/                      # Compiled Python files
+│   └── Perturbe_Algs.py                  # Core edge perturbation algorithms
+
 '''
 ## 🔍 Purpose
 
