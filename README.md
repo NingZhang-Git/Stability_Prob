@@ -19,11 +19,6 @@ This project explores the effects of crafted edge perturbations on graph convolu
 │   └── Perturbe_Algs.py                  # Core edge perturbation algorithms
 
 ```
-## 🔍 Purpose
-
-This repository investigates:
-- How edge perturbation affects GCNN embedding and downstream classification performance.
-- The behavior of different models on synthetic and real-world datasets.
 
 ## Key Algorithm
 
