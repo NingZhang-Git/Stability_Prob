@@ -1,6 +1,6 @@
-# Graph Perturbation and Embedding Experiments
+# Stability of GCNNs and Graph Filters Under Edge Perturbation
 
-This project explores the effects of crafted edge perturbations on graph neural networks (GNNs) and various graph filter embeddings.
+This project explores the effects of crafted edge perturbations on graph convolutional neural networks (GCNNs) and various graph filter embeddings.
 
 ## Project Structure
 ```
