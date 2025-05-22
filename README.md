@@ -3,7 +3,7 @@
 This project explores the effects of edge perturbation on graph neural networks (GNNs) and various graph filter embeddings. The central algorithms for perturbing graph edges are implemented in the `utils/Perturbe_Algs.py` module.
 
 ## Project Structure
-.
+'''
 ├── cSBM_visualization.ipynb # Visualization of SBM results\
 ├── Experiment on GCNN ebd/ # Experiments on Graph Convolutional Neural Networks\
 │ ├── SBM_GCN.ipynb # GCN experiments on SBM graphs\
@@ -19,7 +19,7 @@ This project explores the effects of edge perturbation on graph neural networks 
 ├── utils/ # Utility functions\
 │ ├── pycache/ # Compiled Python files\
 │ └── Perturbe_Algs.py # Core edge perturbation algorithms\
-
+'''
 ## 🔍 Purpose
 
 This repository investigates:
