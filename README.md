@@ -27,12 +27,15 @@ This repository investigates:
 
 ## Key Components
 
-### Perturbation Algorithms
+### Perturbation Algorithms `utils/Perturbe_Algs.py`
 
-**Location:** `utils/Perturbe_Algs.py`
+**Prob-PGD** is a probabilistic projected gradient descent method designed to perturb graph structures in a principled way. It is broadly applicable across a variety of Graph Convolutional Neural Network (GCNN) architectures.
 
-This module contains implementations of our proposed algorithm Prob-PGD and other baselines. 
+The algorithm requires:
+- The input **adjacency matrix** of the graph
+- A **graph filter function**, which represents the specific graph convolutional operator used by the GCNN
 
+These perturbations can be used to evaluate the **robustness** and **sensitivity** of GCNNs and graph-based embeddings under structural changes.
 
 ## Requirements
 
