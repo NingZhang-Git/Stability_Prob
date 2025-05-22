@@ -25,9 +25,9 @@ This repository investigates:
 - How edge perturbation affects GCNN embedding and downstream classification performance.
 - The behavior of different models on synthetic and real-world datasets.
 
-## Key Components
+## Key Algorithm
 
-**Prob-PGD** is a probabilistic projected gradient descent method designed to perturb graph structures in a principled way. It is broadly applicable across a variety of Graph Convolutional Neural Network (GCNN) architectures.
+**Prob-PGD** is a projected gradient descent method designed to perturb graph structures in a principled way, based on a probabilistic analysis of embedding stability. It is broadly applicable across a variety of GCNN architectures.
 
 The algorithm requires:
 - The input **adjacency matrix** of the graph
