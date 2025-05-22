@@ -34,14 +34,6 @@ All Perturbation Algorithms can be found in `utils/Perturbe_Algs.py`.
 
 ## Requirements
 
-Recommended:
-- Python ≥ 3.7
-- PyTorch
-- NetworkX
-- NumPy
-- Matplotlib
-- Scikit-learn
-
 You can install the required packages via:
 
 ```bash
