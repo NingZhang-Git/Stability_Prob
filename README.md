@@ -18,9 +18,9 @@ This project explores the effects of crafted edge perturbations on graph convolu
 │   └── WS/                               # Watts-Strogatz (small-world) networks           
 ├── utils/                                # Utility functions
 │   └── Perturbe_Algs.py                  # Core edge perturbation algorithms
-        ├── random                        # Randomized baseline algorithm
-        ├── pgd-wst                       # Projected Gradient Descent optimizing the worst-case embedding perturbation (Wst-PGD)
-        ├── **pgd-avg**                   # Projected Gradient Descent optimizing the expected embedding perturbation (Prob-PGD)
+        ├── random  (Random)              # Randomized baseline algorithm
+        ├── pgd-wst (Wst-PGD)             # Projected Gradient Descent optimizing the worst-case embedding perturbation 
+        ├── pgd-avg (Prob-PGD)            # Projected Gradient Descent optimizing the expected embedding perturbation 
         
 ```
 
