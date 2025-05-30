@@ -6,7 +6,8 @@ This project explores the effects of crafted edge perturbations on graph convolu
 ```
 ├── cSBM_visualization.ipynb              # Structural interpretation of cSBM 
 ├── Experiment on GCNN ebd/               # Experiments on multilayer GCNNs
-│   ├── SBM_GCN.ipynb                     # GCN
+│   ├── SBM_GCN.ipynb                     # GCN with filter normalized adjacency
+│   ├── SBM_GCN_self_loop.ipynb           # GCN with filter normalized adjacency (with self loop)
 │   └── SBM_GIN.ipynb                     # GIN
 ├── Experiments on graph filter ebd/      # Experiments on graph filtering embeddings
 │   ├── BA/                               # Barabási–Albert graphs
