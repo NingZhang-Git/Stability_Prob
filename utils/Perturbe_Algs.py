@@ -107,21 +107,37 @@ class Attacks:
 
       avg_pertb = torch.trace(self.K @ (gA - gAp) @ (gA - gAp).T)
     if self.filter == 'adj_norm':
-      eps=1e-6
       Ap = self.A + diff
       dA = torch.sum(self.A, dim=1)
       dAp = torch.sum(Ap, dim=1)
       # Compute gA = D_A^(-1/2) * A * D_A^(-1/2), where D_A = diag(sum(A, axis=1))
-      inv_sqrt_dA = torch.diag(torch.pow(dA + eps, -0.5))
+      inv_sqrt_dA = torch.diag(torch.pow(dA, -0.5))
       inv_sqrt_dA = torch.nan_to_num(inv_sqrt_dA, posinf=0, neginf=0) 
       gA = inv_sqrt_dA @ self.A @ inv_sqrt_dA
       # Compute gAp = D_Ap^(-1/2) * Ap * D_Ap^(-1/2), where D_Ap = diag(sum(Ap, axis=1))
-      inv_sqrt_dAp = torch.diag(torch.pow(dAp + eps, -0.5))
+      inv_sqrt_dAp = torch.diag(torch.pow(dAp, -0.5))
       inv_sqrt_dAp = torch.nan_to_num(inv_sqrt_dAp, posinf=0, neginf=0)
       gAp = inv_sqrt_dAp @ Ap @ inv_sqrt_dAp
 
       avg_pertb = torch.trace(self.K @ (gA - gAp) @ (gA - gAp).T)
-       
+    
+    if self.filter == 'adj_norm_self_loop':
+      A_ = self.A + torch.eye(self.n, device=self.device)
+      Ap_ = A_ + diff
+      dA_ = torch.sum(A_ , dim=1)
+      dAp_ = torch.sum(Ap_, dim=1)
+      # Compute gA = D_A^(-1/2) * A * D_A^(-1/2), where D_A = diag(sum(A, axis=1))
+      inv_sqrt_dA_ = torch.diag(torch.pow(dA_, -0.5))
+      inv_sqrt_dA_ = torch.nan_to_num(inv_sqrt_dA_, posinf=0, neginf=0) 
+      gA = inv_sqrt_dA_ @ A_ @ inv_sqrt_dA_
+      # Compute gAp = D_Ap^(-1/2) * Ap * D_Ap^(-1/2), where D_Ap = diag(sum(Ap, axis=1))
+      inv_sqrt_dAp_ = torch.diag(torch.pow(dAp_, -0.5))
+      inv_sqrt_dAp_ = torch.nan_to_num(inv_sqrt_dAp_, posinf=0, neginf=0)
+      gAp = inv_sqrt_dAp_ @ Ap_ @ inv_sqrt_dAp_
+
+      avg_pertb = torch.trace(self.K @ (gA - gAp) @ (gA - gAp).T)
+
+
     return avg_pertb
 
   def obj_wst(self, S):
