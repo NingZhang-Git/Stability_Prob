@@ -192,7 +192,7 @@ class Attacks:
     return wst_pertb
 
 
-  def pgd_avg(self):
+  def Prob_PGD(self):
     """
     Projected Gradient Descent (PGD) for average perturbation.
     Each iteration updates the perturbation indicator matrix S using gradient descent,
@@ -264,7 +264,7 @@ class Attacks:
     return self.perturb(indices)
 
 
-  def pgd_wst(self):
+  def Wst_PGD(self):
     """
     Projected Gradient Descent (PGD) for worst-case perturbation.
     Each iteration updates the perturbation indicator matrix S using gradient descent,
@@ -357,7 +357,7 @@ class Attacks:
 
  
 
-  def greedy_avg(self):
+  def Prob_Greedy(self):
     """
     Greedy algorithm for average perturbation.
     Each iteration selects the edge that maximizes the reward (based on the objective function)
@@ -389,7 +389,7 @@ class Attacks:
       S[v,u] = 1
     return (self.A + (self.J - 2 * self.A) * S)
 
-  def greedy_wst(self):
+  def Wst_Greedy(self):
     """
     Greedy algorithm for worst-case perturbation.
     Each iteration selects the edge that maximizes the reward (based on the objective function)
