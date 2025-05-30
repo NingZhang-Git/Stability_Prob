@@ -17,12 +17,14 @@ class Attacks:
             'adj': adjacency matrix
             'lap': Laplacian matrix
             'adj_norm': normalized adjacency matrix
+            'adj_norm_self_loop': normalized adjacency matrix with self-loop
             if other coustimized filter is used, please provide the function
         '''
         self.A = A
         self.K = K
         self.n = A.shape[0]
         self.J = (torch.ones((self.n, self.n)) - torch.eye(self.n))
+        self.I = torch.eye(self.n)
         self.m = m
         self.alpha = alpha
         self.max_iter = max_iter
@@ -35,6 +37,7 @@ class Attacks:
     self.A = self.A.to(device)
     self.K = self.K.to(device)
     self.J = self.J.to(device)
+    self.I = self.I.to(device)
     self.S = self.S.to(device)
     return self
 
@@ -104,7 +107,6 @@ class Attacks:
       dAp = torch.sum(Ap, dim=1)
       gA = torch.diag(dA) - self.A
       gAp = torch.diag(dAp) - Ap
-
       avg_pertb = torch.trace(self.K @ (gA - gAp) @ (gA - gAp).T)
     if self.filter == 'adj_norm':
       Ap = self.A + diff
@@ -118,11 +120,10 @@ class Attacks:
       inv_sqrt_dAp = torch.diag(torch.pow(dAp, -0.5))
       inv_sqrt_dAp = torch.nan_to_num(inv_sqrt_dAp, posinf=0, neginf=0)
       gAp = inv_sqrt_dAp @ Ap @ inv_sqrt_dAp
-
       avg_pertb = torch.trace(self.K @ (gA - gAp) @ (gA - gAp).T)
     
     if self.filter == 'adj_norm_self_loop':
-      A_ = self.A + torch.eye(self.n, device=self.device)
+      A_ = self.A + self.I
       Ap_ = A_ + diff
       dA_ = torch.sum(A_ , dim=1)
       dAp_ = torch.sum(Ap_, dim=1)
@@ -134,7 +135,6 @@ class Attacks:
       inv_sqrt_dAp_ = torch.diag(torch.pow(dAp_, -0.5))
       inv_sqrt_dAp_ = torch.nan_to_num(inv_sqrt_dAp_, posinf=0, neginf=0)
       gAp = inv_sqrt_dAp_ @ Ap_ @ inv_sqrt_dAp_
-
       avg_pertb = torch.trace(self.K @ (gA - gAp) @ (gA - gAp).T)
 
 
@@ -175,7 +175,20 @@ class Attacks:
       inv_sqrt_dAp = torch.nan_to_num(inv_sqrt_dAp, posinf=0, neginf=0)
       gAp = inv_sqrt_dAp @ Ap @ inv_sqrt_dAp
       wst_pertb = torch.linalg.norm(gA-gAp, ord=2)
-
+    if self.filter == 'adj_norm_self_loop':
+      A_ = self.A + self.I
+      Ap_ = A_ + diff
+      dA_ = torch.sum(A_ , dim=1)
+      dAp_ = torch.sum(Ap_, dim=1)
+      # Compute gA = D_A^(-1/2) * A * D_A^(-1/2), where D_A = diag(sum(A, axis=1))
+      inv_sqrt_dA_ = torch.diag(torch.pow(dA_, -0.5))
+      inv_sqrt_dA_ = torch.nan_to_num(inv_sqrt_dA_, posinf=0, neginf=0) 
+      gA = inv_sqrt_dA_ @ A_ @ inv_sqrt_dA_
+      # Compute gAp = D_Ap^(-1/2) * Ap * D_Ap^(-1/2), where D_Ap = diag(sum(Ap, axis=1))
+      inv_sqrt_dAp_ = torch.diag(torch.pow(dAp_, -0.5))
+      inv_sqrt_dAp_ = torch.nan_to_num(inv_sqrt_dAp_, posinf=0, neginf=0)
+      gAp = inv_sqrt_dAp_ @ Ap_ @ inv_sqrt_dAp_
+      wst_pertb = torch.linalg.norm(gA-gAp, ord=2)
     return wst_pertb
 
 
