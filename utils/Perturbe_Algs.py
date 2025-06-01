@@ -18,6 +18,7 @@ class Attacks:
             'lap': Laplacian matrix
             'adj_norm': normalized adjacency matrix
             'adj_norm_self_loop': normalized adjacency matrix with self-loop
+            'adj_norm_self_loop_k2': normalized adjacency matrix with self-loop of order 2
             if other coustimized filter is used, please provide the function
         '''
         self.A = A
@@ -137,6 +138,21 @@ class Attacks:
       gAp = inv_sqrt_dAp_ @ Ap_ @ inv_sqrt_dAp_
       avg_pertb = torch.trace(self.K @ (gA - gAp) @ (gA - gAp).T)
 
+    if self.filter == 'adj_norm_self_loop_k2':
+      A_ = self.A + self.I
+      Ap_ = A_ + diff
+      dA_ = torch.sum(A_ , dim=1)
+      dAp_ = torch.sum(Ap_, dim=1)
+      # Compute gA = D_A^(-1/2) * A * D_A^(-1/2), where D_A = diag(sum(A, axis=1))
+      inv_sqrt_dA_ = torch.diag(torch.pow(dA_, -0.5))
+      inv_sqrt_dA_ = torch.nan_to_num(inv_sqrt_dA_, posinf=0, neginf=0) 
+      gA = inv_sqrt_dA_ @ A_ @ inv_sqrt_dA_
+      # Compute gAp = D_Ap^(-1/2) * Ap * D_Ap^(-1/2), where D_Ap = diag(sum(Ap, axis=1))
+      inv_sqrt_dAp_ = torch.diag(torch.pow(dAp_, -0.5))
+      inv_sqrt_dAp_ = torch.nan_to_num(inv_sqrt_dAp_, posinf=0, neginf=0)
+      gAp = inv_sqrt_dAp_ @ Ap_ @ inv_sqrt_dAp_
+      Eg = gA @ gA - gAp @ gAp
+      avg_pertb = torch.trace(self.K @ Eg @ Eg.T)
 
     return avg_pertb
 
@@ -189,6 +205,21 @@ class Attacks:
       inv_sqrt_dAp_ = torch.nan_to_num(inv_sqrt_dAp_, posinf=0, neginf=0)
       gAp = inv_sqrt_dAp_ @ Ap_ @ inv_sqrt_dAp_
       wst_pertb = torch.linalg.norm(gA-gAp, ord=2)
+
+    if self.filter == 'adj_norm_self_loop_k2':
+      A_ = self.A + self.I
+      Ap_ = A_ + diff
+      dA_ = torch.sum(A_ , dim=1)
+      dAp_ = torch.sum(Ap_, dim=1)
+      # Compute gA = D_A^(-1/2) * A * D_A^(-1/2), where D_A = diag(sum(A, axis=1))
+      inv_sqrt_dA_ = torch.diag(torch.pow(dA_, -0.5))
+      inv_sqrt_dA_ = torch.nan_to_num(inv_sqrt_dA_, posinf=0, neginf=0) 
+      gA = inv_sqrt_dA_ @ A_ @ inv_sqrt_dA_
+      # Compute gAp = D_Ap^(-1/2) * Ap * D_Ap^(-1/2), where D_Ap = diag(sum(Ap, axis=1))
+      inv_sqrt_dAp_ = torch.diag(torch.pow(dAp_, -0.5))
+      inv_sqrt_dAp_ = torch.nan_to_num(inv_sqrt_dAp_, posinf=0, neginf=0)
+      gAp = inv_sqrt_dAp_ @ Ap_ @ inv_sqrt_dAp_
+      wst_pertb = torch.linalg.norm(gA @ gA -gAp @ gAp, ord=2)
     return wst_pertb
 
 
