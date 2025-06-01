@@ -15,7 +15,11 @@ This project explores the effects of crafted edge perturbations on graph convolu
 │   ├── KC/                               # Zachary's karate club
 │   ├── SBM/                              # Stochastic Block Models
 │   ├── Sensor/                           # Sensor networks
-│   └── WS/                               # Watts-Strogatz (small-world) networks           
+│   └── WS/                               # Watts-Strogatz (small-world) network
+├── Downstream tasks/                     # Experiments on attacking pre-trained GCNNs (GCN, GIN and SGC) for node classification and graph classification
+│   ├── Cora/                             # Node classification
+│   ├── MUTAG/                            # Graph classification
+│   ├── ENZYMES/                          # Graph classification
 ├── utils/                                # Utility functions
 │   └── Perturbe_Algs.py                  # Core edge perturbation algorithms
         ├── randomAttack                  # Randomized baseline algorithm
