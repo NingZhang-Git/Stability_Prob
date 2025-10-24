@@ -1,6 +1,28 @@
-# Stability of GCNNs and Graph Filters Under Edge Perturbation
+## Repository for the paper: [On the Stability of Graph Convolutional Neural Networks: A Probabilistic Perspective](https://arxiv.org/abs/2506.01213]
 
-This project explores the effects of crafted edge perturbations on graph convolutional neural networks (GCNNs) and various graph filter embeddings.
+In the project, we explore the effects of crafted edge perturbations on graph convolutional neural networks (GCNNs) and various graph filter embeddings.
+
+## Key Algorithm
+
+**Prob-PGD** is a projected gradient descent method designed to perturb graph structures in a principled way, based on a probabilistic analysis of embedding stability. It is broadly applicable across a variety of GCNN architectures.
+
+The algorithm requires:
+- The input **adjacency matrix** of the graph
+- A **graph filter function**, which represents the specific graph convolutional operator used by the GCNN
+
+These perturbations can be used to evaluate the **robustness** and **sensitivity** of GCNNs and graph-based embeddings under structural changes.
+
+All Perturbation Algorithms can be found in `utils/Perturbe_Algs.py`.
+
+## Requirements
+
+You can install the required packages via:
+
+```bash
+pip install -r requirements.txt
+
+
+
 
 ## Project Structure
 ```
@@ -28,21 +50,4 @@ This project explores the effects of crafted edge perturbations on graph convolu
         
 ```
 
-## Key Algorithm
 
-**Prob-PGD** is a projected gradient descent method designed to perturb graph structures in a principled way, based on a probabilistic analysis of embedding stability. It is broadly applicable across a variety of GCNN architectures.
-
-The algorithm requires:
-- The input **adjacency matrix** of the graph
-- A **graph filter function**, which represents the specific graph convolutional operator used by the GCNN
-
-These perturbations can be used to evaluate the **robustness** and **sensitivity** of GCNNs and graph-based embeddings under structural changes.
-
-All Perturbation Algorithms can be found in `utils/Perturbe_Algs.py`.
-
-## Requirements
-
-You can install the required packages via:
-
-```bash
-pip install -r requirements.txt
