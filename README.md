@@ -1,4 +1,4 @@
-## Repository for the paper: [On the Stability of Graph Convolutional Neural Networks: A Probabilistic Perspective](https://arxiv.org/abs/2506.01213]
+## Repository for the paper: [On the Stability of Graph Convolutional Neural Networks: A Probabilistic Perspective](https://arxiv.org/abs/2506.01213)
 
 In the project, we explore the effects of crafted edge perturbations on graph convolutional neural networks (GCNNs) and various graph filter embeddings.
 
@@ -20,7 +20,7 @@ You can install the required packages via:
 
 ```bash
 pip install -r requirements.txt
-
+```
 
 
 
